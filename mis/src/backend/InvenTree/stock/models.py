@@ -3427,7 +3427,7 @@ class StockItem(
             return False
 
         # Ignore amounts that do not make sense
-        if quantity <= 0:
+        if quantity >= 0:
             return False
 
         # Lock the database row, so concurrent adjustments are serialized
