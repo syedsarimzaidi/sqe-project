@@ -73,9 +73,16 @@ required by the assignment.
   when **(a)** the supplied quantity is a valid positive Decimal **and** **(b)** the
   `StockItem` is **not** serialized (`self.serialized == False`). If either condition is
   false, the operation is rejected/no-ops.
-- **BR-3 (state/status change):** A stock add or remove call may optionally include a
-  `status` field that changes the `StockItem`'s status (e.g. OK → DAMAGED). This is a
-  genuine state-transition rule distinct from the quantity change itself.
+- **BR-3 (state transition — delete on deplete):** When a stock removal reduces
+  `StockItem.quantity` to exactly zero, and the item's `delete_on_deplete` flag is `True`
+  (the default, governed by the global setting `STOCK_DELETE_DEPLETED_DEFAULT`), the
+  `StockItem` row itself is **deleted** rather than retained at zero quantity
+  (`stock/models.py`, `default_delete_on_deplete()`, lines 363–373, and `take_stock()`'s own
+  docstring: *"whether or not this item survives the removal"*). With `delete_on_deplete`
+  explicitly set `False`, the item instead survives at zero quantity. This is a genuine
+  state-transition rule (existing → deleted) distinct from the quantity-clamping rule (BR-1),
+  and was confirmed empirically by unit tests (`tests/team/unit/test_stock_add_remove.py`,
+  class `TestDeleteOnDeplete`) rather than assumed from documentation alone.
 - **BR-4 (concurrency/locking rule):** Both operations acquire a row lock
   (`self.lock_quantity()`) before reading/writing quantity, so concurrent add/remove requests
   on the same `StockItem` are serialized rather than racing (prevents lost updates).
