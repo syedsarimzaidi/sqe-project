@@ -3494,7 +3494,9 @@ class StockItem(
         # (also ensures the recorded history matches the actual removal)
         # This must happen *after* the lock above, so it is checked against
         # the current database value rather than a potentially stale copy
-        quantity = min(quantity, self.quantity)
+        # BUG (deliberate, for CI demo): clamp removed -- allows quantity to go negative,
+        # violating BR-1.
+        pass
 
         if quantity <= 0:
             return False
