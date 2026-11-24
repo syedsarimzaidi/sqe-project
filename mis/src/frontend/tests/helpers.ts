@@ -1,0 +1,317 @@
+import { type Locator, type Page, expect } from '@playwright/test';
+import { createApi } from './api';
+
+export const clickOnParamFilter = async (page: Page, name: string) => {
+  const button = await page
+    .getByRole('button', { name: `${name} Not sorted` })
+    .getByRole('button')
+    .first();
+  await button.scrollIntoViewIfNeeded();
+  await button.click();
+};
+
+/**
+ * Open the filter drawer for the currently visible table
+ * @param page - The page object
+ */
+export const openFilterDrawer = async (page: Page) => {
+  await page.getByLabel('table-select-filters').click();
+};
+
+/**
+ * Close the filter drawer for the currently visible table
+ * @param page - The page object
+ */
+export const closeFilterDrawer = async (page: Page) => {
+  await page.getByLabel('filter-drawer-close').click();
+};
+
+/**
+ * Click the specified button (if it is visible)
+ * @param page - The page object
+ * @param name - The name of the button to click
+ */
+export const clickButtonIfVisible = async (
+  page: Page,
+  name: string,
+  timeout = 500
+) => {
+  await page.waitForTimeout(timeout);
+
+  if (await page.getByRole('button', { name }).isVisible()) {
+    await page.getByRole('button', { name }).click();
+  }
+};
+
+/**
+ * Clear all filters from the currently visible table
+ * @param page - The page object
+ */
+export const clearTableFilters = async (page: Page) => {
+  await openFilterDrawer(page);
+  await clickButtonIfVisible(page, 'Clear Filters', 250);
+  await closeFilterDrawer(page);
+  await page.waitForLoadState('networkidle');
+};
+
+export const setTableChoiceFilter = async (
+  page: Page,
+  filter: string,
+  value: string
+) => {
+  await openFilterDrawer(page);
+
+  await page.getByRole('button', { name: 'Add Filter' }).click();
+  await page.getByPlaceholder('Select filter').fill(filter);
+  await page.getByPlaceholder('Select filter').click();
+
+  // Construct a regex to match the filter name exactly
+  const filterRegex = new RegExp(`^${filter}$`, 'i');
+
+  await page.getByRole('option', { name: filterRegex }).click();
+
+  await page.getByPlaceholder('Select filter value').click();
+  await page.getByRole('option', { name: value }).click();
+
+  await page.waitForLoadState('networkidle');
+  await closeFilterDrawer(page);
+};
+
+/**
+ * Return the parent 'row' element for a given 'cell' element
+ * @param cell - The cell element
+ */
+export const getRowFromCell = async (cell) => {
+  return cell.locator('xpath=ancestor::tr').first();
+};
+
+export const clickOnRowMenu = async (cell) => {
+  const row = await getRowFromCell(cell);
+
+  await row.getByLabel(/row-action-menu-/i).click();
+};
+
+interface NavigateOptions {
+  waitUntil?: 'load' | 'domcontentloaded' | 'networkidle';
+  baseUrl?: string;
+}
+
+/**
+ * Navigate to the provided page, and wait for loading to complete
+ * @param page
+ * @param url
+ */
+export const navigate = async (
+  page,
+  url: string,
+  options?: NavigateOptions
+) => {
+  if (!url.startsWith('http') && !url.includes('web')) {
+    url = `/web/${url}`.replaceAll('//', '/');
+  }
+
+  const path: string = options?.baseUrl
+    ? new URL(url, options.baseUrl).toString()
+    : url;
+
+  await page.goto(path, { waitUntil: options?.waitUntil ?? 'load' });
+};
+
+/**
+ * Ctrl+click a link, and return the new tab which it opens (in the same browser context).
+ *
+ * A modified click occasionally fails to open a new tab in CI - so the
+ * click is retried (with a short per-attempt timeout) rather than
+ * waiting for the entire test timeout on a single attempt.
+ */
+export const openInNewTab = async (
+  page: Page,
+  link: Locator,
+  url: string | RegExp
+): Promise<Page> => {
+  const context = page.context();
+  let popup: Page | undefined;
+
+  await expect(async () => {
+    const popupPromise = context.waitForEvent('page', { timeout: 5000 });
+    await link.click({ modifiers: ['ControlOrMeta'], timeout: 5000 });
+    popup = await popupPromise;
+  }).toPass({ timeout: 30000 });
+
+  await popup!.waitForURL(url);
+  return popup!;
+};
+
+/**
+ * CLick on the 'tab' element with the provided name
+ */
+export const loadTab = async (page: Page, tabName: string, exact?: boolean) => {
+  await page
+    .getByLabel(/panel-tabs-/)
+    .getByRole('tab', { name: tabName, exact: exact ?? false })
+    .click();
+
+  await page.waitForLoadState('networkidle');
+};
+
+// Activate "table" view in certain contexts
+export const activateTableView = async (page: Page) => {
+  await page.getByLabel('segmented-icon-control-table').click();
+  await page.waitForLoadState('networkidle');
+};
+
+// Activate "calendar" view in certain contexts
+export const activateCalendarView = async (page: Page) => {
+  await page.getByLabel('segmented-icon-control-calendar').click();
+  await page.waitForLoadState('networkidle');
+};
+
+export const tableSearch = async (page: Page, query: string) => {
+  await page.getByLabel('table-search-input').fill(query);
+  // Wait for longer than the SearchInput debounce (500ms)
+  await page.waitForTimeout(600);
+  await page.waitForLoadState('networkidle');
+};
+
+export const clearTableSearch = async (page: Page) => {
+  await page.getByLabel('table-search-input').clear();
+  await page.waitForTimeout(600);
+  await page.waitForLoadState('networkidle');
+};
+
+/**
+ * Perform a 'global search' on the provided page, for the provided query text
+ */
+export const globalSearch = async (page: Page, query: string) => {
+  await page.getByLabel('open-search').click();
+  await page.getByLabel('global-search-input').clear();
+  await page.getByPlaceholder('Enter search text').fill(query);
+  await page.waitForTimeout(300);
+};
+
+export const deletePart = async (name: string) => {
+  const api = await createApi({});
+  const parts = await api
+    .get('part/', {
+      params: { search: name }
+    })
+    .then((res) => res.json());
+  const existingPart = parts.find((p: any) => p.name === name);
+  if (existingPart) {
+    // Parts must be inactive (and unlocked) before they can be deleted.
+    // Note: other tests may run concurrently against the same database
+    const patch = await api.patch(`part/${existingPart.pk}/`, {
+      data: { active: false, locked: false }
+    });
+    expect(patch.status(), await patch.text()).toBe(200);
+
+    const res = await api.delete(`part/${existingPart.pk}/`);
+    expect(res.status(), await res.text()).toBe(204);
+  }
+};
+
+// Click on the column sorting toggle
+export const toggleColumnSorting = async (page: Page, columnName: string) => {
+  // Click on the column header to toggle sorting
+  const regex = new RegExp(
+    `^${columnName}\\s*(Not sorted|Sorted ascending|Sorted descending)$`,
+    'i'
+  );
+
+  await page.getByRole('button', { name: regex }).click();
+  await page.waitForTimeout(50);
+  await page.waitForLoadState('networkidle');
+};
+
+// Display the 'table' view
+export const showTableView = async (page: Page) => {
+  await page
+    .getByRole('button', { name: 'segmented-icon-control-table' })
+    .click();
+  await page.waitForLoadState('networkidle');
+};
+
+// Display the 'parameteric' view
+export const showParametricView = async (page: Page) => {
+  await page
+    .getByRole('button', { name: 'segmented-icon-control-parametric' })
+    .click();
+  await page.waitForLoadState('networkidle');
+};
+
+// Display the 'calendar' view
+export const showCalendarView = async (page: Page) => {
+  await page
+    .getByRole('button', { name: 'segmented-icon-control-calendar' })
+    .click();
+  await page.waitForLoadState('networkidle');
+};
+
+// Check for an expected number of columns in the visible table
+export const expectTableColumnCount = async (page: Page, count: number) => {
+  const columns = page.locator('table thead tr th');
+  await expect(columns).toHaveCount(count);
+};
+
+// Open an "action" associated with the detail view of a page
+export const openDetailAction = async (
+  page: Page,
+  menuName: string,
+  actionName: string
+) => {
+  // Ensure idle state first
+  await page.waitForLoadState('networkidle');
+
+  // Click on the "actions" menu
+  await page.getByRole('button', { name: `action-menu-${menuName}` }).click();
+
+  // Click on the specified action
+  await page
+    .getByRole('menuitem', {
+      name: `action-menu-${menuName}-actions-${actionName}`
+    })
+    .click();
+};
+
+export const waitForDataOutput = async (
+  page: Page,
+  trigger: () => Promise<unknown>
+) => {
+  const closePopup = async (popup: Page) => {
+    await popup.close();
+    await page.bringToFront();
+  };
+  page.on('popup', closePopup);
+
+  try {
+    await page.bringToFront();
+    await trigger();
+    await page.getByText('Process completed successfully').first().waitFor();
+  } finally {
+    page.off('popup', closePopup);
+  }
+};
+
+/**
+ * Handle a re-authentication (password) prompt, if one is displayed.
+ */
+// Handle a re-authentication prompt (if displayed)
+export const reauthenticate = async (
+  page: Page,
+  password: string,
+  time = 3000
+) => {
+  const dialog = page.getByRole('dialog', { name: 'Reauthenticate' });
+  const visible = await dialog
+    .waitFor({ timeout: time })
+    .then(() => true)
+    .catch(() => false);
+
+  if (visible) {
+    await dialog.locator('input[type="password"]').fill(password);
+    await dialog.getByRole('button', { name: 'Submit', exact: true }).click();
+    await dialog.waitFor({ state: 'hidden' });
+  }
+
+  return visible;
+};

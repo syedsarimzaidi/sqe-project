@@ -1,0 +1,27 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+dist/
+
+# Django / InvenTree runtime data (not part of baseline source)
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
+mis/data/
+.env.inventree
+
+# Test reports / coverage
+htmlcov/
+.coverage
+coverage.xml
+.pytest_cache/
+playwright-report/
+test-results/
+
+# OS
+.DS_Store
