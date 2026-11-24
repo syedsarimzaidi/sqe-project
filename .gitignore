@@ -13,6 +13,9 @@ dist/
 *.sqlite3-shm
 *.sqlite3-wal
 mis/data/
+data/static/
+data/media/
+data/backup/
 .env.inventree
 
 # Test reports / coverage
