@@ -1,6 +1,6 @@
 # SE3002 — Software Quality Engineering Final Project
 
-**Student:** Syed Sarim Zaidi
+**Student:** Eman Hassan
 **Selected MIS:** [InvenTree](https://github.com/inventree/inventree) — open-source Inventory Management System
 **Baseline commit:** `4f5fbc091b8066d29445495d3e177078df7abfcd`
 **License:** MIT
