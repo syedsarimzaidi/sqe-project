@@ -345,3 +345,67 @@ class TestDeleteOnDeplete:
 
         assert ok is True
         assert item.quantity == 0
+
+
+# ---------------------------------------------------------------------------
+# Closing remaining branch-coverage gaps in add_stock()/take_stock() themselves
+# (as opposed to the file as a whole, which also contains unrelated model
+# classes — StockLocation, StockItemTestResult, etc. — outside this project's
+# selected workflows and therefore out of scope for 100% coverage).
+# ---------------------------------------------------------------------------
+
+
+class TestRemainingBranches:
+    def test_add_stock_on_unsaved_item_is_rejected(self, db, part, user):
+        """lock_quantity() returns False when the item has no primary key yet (never
+        saved to the database) — add_stock must propagate that as a rejection rather
+        than raising. Covers the lock_quantity() guard branch in add_stock().
+        """
+        from stock.models import StockItem
+
+        item = StockItem(part=part, quantity=5)  # deliberately not .save()d
+        assert item.pk is None
+
+        ok = item.add_stock(Decimal('3'), user)
+
+        assert ok is False
+
+    def test_take_stock_on_unsaved_item_is_rejected(self, db, part, user):
+        """Same lock_quantity() guard, exercised via take_stock()."""
+        from stock.models import StockItem
+
+        item = StockItem(part=part, quantity=5)
+        assert item.pk is None
+
+        ok = item.take_stock(Decimal('3'), user)
+
+        assert ok is False
+
+    def test_take_stock_non_numeric_quantity_is_rejected(self, stock_item, user):
+        """EP (invalid type) for take_stock's own Decimal conversion — mirrors the
+        add_stock case already covered in TestAddStock, closing the equivalent branch
+        in take_stock().
+        """
+        before = stock_item.quantity
+        ok = stock_item.take_stock('not-a-number', user)
+        stock_item.refresh_from_db()
+
+        assert ok is False
+        assert stock_item.quantity == before
+
+    def test_take_stock_with_record_tracking_false_skips_history(self, stock_item, user):
+        """record_tracking=False takes the `event = nullcontext()` branch (line 3524 in
+        take_stock()) instead of wrapping the update in an explicit tracking_event() call.
+        The quantity change itself must still happen correctly either way.
+
+        Note: this does not assert zero audit-log rows afterwards — InvenTree's generic
+        auditlog integration logs the underlying save() automatically regardless of
+        record_tracking, which is a separate mechanism from the explicit StockHistoryCode
+        tracking_event() this flag controls. What is verified here is the branch's actual
+        contract: the operation succeeds and the quantity is updated correctly.
+        """
+        ok = stock_item.take_stock(Decimal('3'), user, record_tracking=False)
+        stock_item.refresh_from_db()
+
+        assert ok is True
+        assert stock_item.quantity == 7
