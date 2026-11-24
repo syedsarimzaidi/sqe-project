@@ -1,0 +1,245 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "InvenTree Stock Add/Remove API (trimmed)",
+    "version": "583",
+    "description": "Trimmed extract of the InvenTree project's own auto-generated OpenAPI schema (drf-spectacular), limited to the two selected-workflow endpoints: receive stock (/api/stock/add/) and dispatch stock (/api/stock/remove/). Full schema regenerated with: python manage.py spectacular --file openapi_full.json --format openapi-json"
+  },
+  "paths": {
+    "/api/stock/add/": {
+      "post": {
+        "operationId": "stock_add_create",
+        "description": "Endpoint for adding a quantity of stock to an existing StockItem.",
+        "tags": [
+          "stock"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StockAdd"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/StockAdd"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/StockAdd"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "tokenAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "cookieAuth": []
+          },
+          {
+            "oauth2": [
+              "r:add:build",
+              "r:add:stock"
+            ]
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockAdd"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/stock/remove/": {
+      "post": {
+        "operationId": "stock_remove_create",
+        "description": "Endpoint for removing a quantity of stock from an existing StockItem.",
+        "tags": [
+          "stock"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StockRemove"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/StockRemove"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/StockRemove"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "tokenAuth": []
+          },
+          {
+            "basicAuth": []
+          },
+          {
+            "cookieAuth": []
+          },
+          {
+            "oauth2": [
+              "r:add:build",
+              "r:add:stock"
+            ]
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockRemove"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "StockAdd": {
+        "type": "object",
+        "description": "Serializer for adding stock to stock item(s).",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StockAdjustmentItem"
+            }
+          },
+          "notes": {
+            "type": "string",
+            "description": "Stock transaction notes",
+            "maxLength": 512
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "StockRemove": {
+        "type": "object",
+        "description": "Serializer for removing stock from stock item(s).",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StockAdjustmentItem"
+            }
+          },
+          "notes": {
+            "type": "string",
+            "description": "Stock transaction notes",
+            "maxLength": 512
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "StockAdjustmentItem": {
+        "type": "object",
+        "description": "Serializer for a single StockItem within a stock adjustment request.\n\nRequired Fields:\n    - item: StockItem object\n    - quantity: Numerical quantity\n\nOptional Fields (may be used by external tools)\n    - status: Change StockItem status code\n    - packaging: Change StockItem packaging\n    - batch: Change StockItem batch code\n\nThe optional fields can be used to adjust values for individual stock items",
+        "properties": {
+          "pk": {
+            "type": "integer",
+            "title": "stock_item",
+            "description": "StockItem primary key value"
+          },
+          "quantity": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d{0,10}(?:\\.\\d{0,5})?$"
+          },
+          "batch": {
+            "type": "string",
+            "title": "Batch Code",
+            "description": "Batch code for this stock item",
+            "maxLength": 100
+          },
+          "status": {
+            "description": "Stock item status code\n\n* `None` - No Change\n* `10` - OK\n* `50` - Attention needed\n* `55` - Damaged\n* `60` - Destroyed\n* `65` - Rejected\n* `70` - Lost\n* `75` - Quarantined\n* `85` - Returned",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Status2a7Enum"
+              },
+              {
+                "$ref": "#/components/schemas/BlankEnum"
+              },
+              {
+                "$ref": "#/components/schemas/NullEnum"
+              }
+            ]
+          },
+          "packaging": {
+            "type": "string",
+            "description": "Packaging this stock item is stored in",
+            "maxLength": 50
+          },
+          "merge": {
+            "type": "boolean",
+            "default": false,
+            "title": "Merge into existing stock",
+            "description": "Merge this item into existing stock at the destination if possible"
+          }
+        },
+        "required": [
+          "pk",
+          "quantity"
+        ]
+      },
+      "BlankEnum": {
+        "enum": [
+          ""
+        ]
+      },
+      "Status2a7Enum": {
+        "enum": [
+          10,
+          50,
+          55,
+          60,
+          65,
+          70,
+          75,
+          85
+        ],
+        "type": "integer",
+        "description": "* `10` - OK\n* `50` - Attention needed\n* `55` - Damaged\n* `60` - Destroyed\n* `65` - Rejected\n* `70` - Lost\n* `75` - Quarantined\n* `85` - Returned"
+      },
+      "NullEnum": {
+        "enum": [
+          null
+        ]
+      }
+    }
+  }
+}
