@@ -1,0 +1,25 @@
+2026.11.25 11:25:16 INFO  es[][o.e.b.Elasticsearch] version[9.4.7], pid[7328], build[tar/9093bd876e86f531329aad3704ec9ab607c909c8/2026-09-09T22:41:14.293156395Z], OS[Linux/6.18.57/amd64], JVM[Debian/OpenJDK 64-Bit Server VM/21.0.13/21.0.13+9-1-deb13u2-Debian]
+2026.11.25 11:25:16 INFO  es[][o.e.b.Elasticsearch] JVM home [/usr/lib/jvm/java-21-openjdk-amd64], using bundled JDK [false]
+2026.11.25 11:25:16 INFO  es[][o.e.b.Elasticsearch] JVM arguments [-Des.networkaddress.cache.ttl=60, -Des.networkaddress.cache.negative.ttl=10, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -XX:-OmitStackTraceInFastThrow, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, --add-opens=org.apache.lucene.core/org.apache.lucene.codecs.lucene99=org.elasticsearch.server, --add-opens=org.apache.lucene.core/org.apache.lucene.codecs.hnsw=org.elasticsearch.server, --add-opens=org.apache.lucene.core/org.apache.lucene.internal.vectorization=org.elasticsearch.server, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -Dlog4j2.formatMsgNoLookups=true, -Djava.locale.providers=CLDR, -Dorg.apache.lucene.vectorization.upperJavaFeatureVersion=21, -Des.path.home=/workspace/work/sonar/portable/opt/sonarqube/elasticsearch, -Des.distribution.type=tar, -Des.java.type=ES_JAVA_HOME, --enable-native-access=org.elasticsearch.nativeaccess,org.apache.lucene.core, --enable-native-access=ALL-UNNAMED, -XX:ReplayDataFile=logs/replay_pid%p.log, -XX:+EnableDynamicAgentLoading, -Djdk.attach.allowAttachSelf=true, --patch-module=java.base=/workspace/work/sonar/portable/opt/sonarqube/elasticsearch/lib/entitlement-bridge/elasticsearch-entitlement-bridge-9.4.7.jar, --add-exports=java.base/org.elasticsearch.entitlement.bridge=org.elasticsearch.entitlement,java.logging,java.net.http,java.naming,jdk.net,jdk.zipfs,jdk.management.agent, -XX:+UseG1GC, -Djava.io.tmpdir=/workspace/work/sonar/portable/opt/sonarqube/temp, -XX:ErrorFile=/workspace/work/sonar/portable/opt/sonarqube/logs/es_hs_err_pid%p.log, -Xlog:disable, -Des.networkaddress.cache.ttl=60, -Des.networkaddress.cache.negative.ttl=10, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -Djna.tmpdir=/workspace/work/sonar/portable/opt/sonarqube/temp, -XX:-OmitStackTraceInFastThrow, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dio.netty.allocator.numDirectArenas=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -Dlog4j2.formatMsgNoLookups=true, -Djava.locale.providers=COMPAT, -Xmx512m, -Xms512m, -XX:MaxDirectMemorySize=256m, -XX:+HeapDumpOnOutOfMemoryError, -XX:G1HeapRegionSize=4m, -XX:InitiatingHeapOccupancyPercent=30, -XX:G1ReservePercent=15, --module-path=/workspace/work/sonar/portable/opt/sonarqube/elasticsearch/lib, --add-modules=jdk.net, --add-modules=jdk.management.agent, --add-modules=ALL-MODULE-PATH, -Djdk.module.main=org.elasticsearch.server]
+2026.11.25 11:25:16 INFO  es[][o.e.b.Elasticsearch] Default Locale [en]
+2026.11.25 11:25:16 INFO  es[][o.e.n.j.JdkVectorLibrary] vec_caps=2
+2026.11.25 11:25:16 INFO  es[][o.e.n.NativeAccess] Using native vector library; to disable start with -Dorg.elasticsearch.nativeaccess.enableVectorLibrary=false
+2026.11.25 11:25:16 INFO  es[][o.e.n.NativeAccess] Using [jdk] native provider and native methods for [Linux]
+2026.11.25 11:25:16 ERROR es[][o.e.b.Elasticsearch] fatal exception while booting Elasticsearch
+java.lang.RuntimeException: Could not set coredump filter
+	at org.elasticsearch.server@9.4.7/org.elasticsearch.bootstrap.Elasticsearch.setCoredumpFilter(Elasticsearch.java:658)
+	at org.elasticsearch.server@9.4.7/org.elasticsearch.bootstrap.Elasticsearch.initializeNatives(Elasticsearch.java:520)
+	at org.elasticsearch.server@9.4.7/org.elasticsearch.bootstrap.Elasticsearch.initPhase2(Elasticsearch.java:189)
+	at org.elasticsearch.server@9.4.7/org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:101)
+Caused by: java.nio.file.NoSuchFileException: /proc/self/coredump_filter
+	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:261)
+	at java.base/java.nio.file.spi.FileSystemProvider.newOutputStream(FileSystemProvider.java:482)
+	at java.base/java.nio.file.Files.newOutputStream(Files.java:228)
+	at java.base/java.nio.file.Files.write(Files.java:3505)
+	at java.base/java.nio.file.Files.writeString(Files.java:3727)
+	at java.base/java.nio.file.Files.writeString(Files.java:3667)
+	at org.elasticsearch.server@9.4.7/org.elasticsearch.bootstrap.Elasticsearch.setCoredumpFilter(Elasticsearch.java:656)
+	... 3 more

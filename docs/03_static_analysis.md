@@ -61,3 +61,20 @@ M 3462:4 StockItem.take_stock - B (7)
 pip install radon
 radon cc mis/src/backend/InvenTree/stock/models.py -s -a | grep -A1 "add_stock\|take_stock"
 ```
+
+## Continuation SonarQube verification — Eman Hassan
+
+SonarQube Community Build 10.6.0.92116 successfully processed a scanner report for `mis/src/backend/InvenTree/stock/models.py` at revision `4e72745`. Scanner 7.2.0.5079 imported the baseline unit coverage XML. The current Community Build could not start Elasticsearch in this environment, so the run used the compatible earlier release.
+
+| SonarQube file scope | Observed |
+|---|---:|
+| Lines of code | 2,186 |
+| Cyclomatic complexity | 480 |
+| Cognitive complexity | 503 |
+| Coverage | 31.4% |
+| Line coverage | 37.6% |
+| Branch coverage | 16.3% |
+| Code smells | 12 |
+| Bugs, vulnerabilities and security hotspots reported | 0 each |
+
+The first-analysis quality gate returned `OK` with zero conditions. The two method complexity values of 5 and 7 remain the independent Radon results. The local Sonar report is scoped to one file and uses the installed rule profile. See [measures](evidence/2026-11-25/sonarqube-measures.json), [findings](evidence/2026-11-25/sonarqube-findings.json), [quality gate](evidence/2026-11-25/sonarqube-quality-gate.json) and [scanner output](evidence/2026-11-25/sonarqube-scanner.log).

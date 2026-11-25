@@ -1,0 +1,13 @@
+4e72745 Add risk register
+df78291 Add traceability matrix (FR/BR -> test coverage)
+3dc3662 Add security assessment: dependency audit (pip-audit + npm audit)
+ae3a863 QA pass: exploratory bug-hunting + project handoff status
+35ae303 Merge PR #1: Fix add_stock() regression (CI demo)
+2afd9ec Add CI pipeline (GitHub Actions) and static analysis / complexity comparison
+6bd0f22 Add custom mutation testing harness for add_stock/take_stock
+a482bef Fix .gitignore: exclude runtime data/ directories (static/media/backup)
+d98c5d5 Add Area 2: OpenAPI spec extract, EP+BVA generator, API/integration tests
+e61372c Close branch-coverage gaps; add coverage report for add_stock/take_stock
+c505779 Update student name in README
+0047228 Add Area 1 unit tests for Stock receive/dispatch workflows
+ef80f8b Initial setup: vendor InvenTree baseline (commit 4f5fbc0), add project scope doc

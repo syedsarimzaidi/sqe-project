@@ -35,3 +35,17 @@ This table is not generated from a tool — it is a manual compilation cross-che
 `docs/06_traceability_matrix.md` (R2, R3), `docs/03_static_analysis.md` (R7), and
 `docs/00_HANDOFF_STATUS.md` (R6 Playwright-half, R8, R10 scope). Anyone updating one of those
 source documents should re-check whether a risk's status here needs updating too.
+
+## Continuation assessment — Eman Hassan
+
+| Risk | Status after verification |
+|---|---|
+| R2 | Four additional unit-level MC/DC witnesses passed for the three deletion predicates. API and mutation coverage gaps remain. |
+| R3 | SQLite and a single k6 VU provide a repeatable baseline. Production-database row locking and concurrent same-record updates remain unverified. |
+| R4 | Historical issues remain open. Two login accessibility findings were confirmed and filed as issues #5 and #7. |
+| R5 | The backend audit was independently rerun. Direct npm registry lookup on installed frontend versions returned five advisories, using a different counting method from the historical npm audit. |
+| R6 | System Chromium enabled Playwright, axe-core and Lighthouse. A portable ZAP release enabled passive review of nominated local requests. |
+| R7 | The current SonarQube image had environment blockers. The compatible 10.6 Community Build completed a local analysis of the Stock model file. Radon was independently rerun. |
+| R8 | The k6 baseline and between-request restart checks passed. Multi-user load and in-flight atomicity remain outside those results. |
+| R11 | GitHub API access allowed filing numbered issues. Git HTTPS authentication required a publication fallback. |
+| R12 | The CI coverage step has no enforcing assertion, creating a risk of a false green gate. The selected methods were independently measured locally. |

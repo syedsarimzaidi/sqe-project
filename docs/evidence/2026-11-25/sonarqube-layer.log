@@ -1,0 +1,2 @@
+Extract official SonarQube application layer sha256:dd997aadd0c0f4755eae3a08e24b2f8dfdaf1313eb0394ab87ac07a05d6cd5c1 without Docker VFS.
+944M	/workspace/work/sonar/portable/opt/sonarqube

@@ -1,0 +1,110 @@
+[
+  {
+    "name": "test-and-coverage",
+    "conclusion": "success",
+    "html_url": "https://github.com/syedsarimzaidi/sqe-project/actions/runs/45547599494/job/138980848135",
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Set up Python 3.12",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install dependencies",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run migrations",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run unit + API tests with coverage",
+        "conclusion": "success"
+      },
+      {
+        "name": "Enforce coverage threshold on selected workflow methods",
+        "conclusion": "success"
+      },
+      {
+        "name": "Static analysis (radon cyclomatic complexity)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Upload coverage artifact",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Set up Python 3.12",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ]
+  },
+  {
+    "name": "mutation-testing",
+    "conclusion": "success",
+    "html_url": "https://github.com/syedsarimzaidi/sqe-project/actions/runs/45547599494/job/138982522426",
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Set up Python 3.12",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install dependencies",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run migrations (for mutation DB)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run custom mutation testing harness",
+        "conclusion": "success"
+      },
+      {
+        "name": "Enforce mutation score threshold",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Set up Python 3.12",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ]
+  },
+  {
+    "name": "sonarcloud",
+    "conclusion": "skipped",
+    "html_url": "https://github.com/syedsarimzaidi/sqe-project/actions/runs/45547599494/job/138982524270",
+    "steps": []
+  }
+]

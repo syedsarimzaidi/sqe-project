@@ -1,0 +1,104 @@
+11:29:49.452 INFO  Scanner configuration file: NONE
+11:29:49.455 INFO  Project root configuration file: NONE
+11:29:49.473 INFO  SonarScanner CLI 7.2.0.5079
+11:29:49.479 INFO  Linux 6.18.57 amd64
+11:29:50.825 INFO  Communicating with SonarQube Server 10.6.0.92116
+11:29:50.826 INFO  JRE provisioning is disabled
+11:29:50.827 INFO  The java executable in the PATH will be used
+11:29:51.754 INFO  Starting SonarScanner Engine...
+11:29:51.754 INFO  Java 21.0.13 Debian (64-bit)
+11:29:52.758 INFO  Load global settings
+11:29:52.858 INFO  Load global settings (done) | time=107ms
+11:29:52.860 INFO  Server id: 147B411E-AaIRZKTL0_ePzwbpEYmF
+11:29:52.890 INFO  Loading required plugins
+11:29:52.890 INFO  Load plugins index
+11:29:52.936 INFO  Load plugins index (done) | time=46ms
+11:29:52.936 INFO  Load/download plugins
+11:29:53.586 INFO  Load/download plugins (done) | time=650ms
+11:29:53.966 INFO  Process project properties
+11:29:53.972 INFO  Process project properties (done) | time=7ms
+11:29:53.981 INFO  Project key: sqe-stock-qa
+11:29:53.981 INFO  Base dir: /workspace/work/sqe
+11:29:53.981 INFO  Working dir: /workspace/work/sonar/scanner-work
+11:29:53.988 INFO  Load project settings for component key: 'sqe-stock-qa'
+11:29:54.052 INFO  Load quality profiles
+11:29:54.180 INFO  Load quality profiles (done) | time=128ms
+11:29:54.225 INFO  Load active rules
+11:29:59.355 INFO  Load active rules (done) | time=5130ms
+11:29:59.362 INFO  Load analysis cache
+11:29:59.370 INFO  Load analysis cache (404) | time=9ms
+11:29:59.466 INFO  Preprocessing files...
+11:29:59.678 INFO  1 language detected in 1 preprocessed file
+11:29:59.678 INFO  0 files ignored because of scm ignore settings
+11:29:59.678 INFO  Loading plugins for detected languages
+11:29:59.678 INFO  Load/download plugins
+11:29:59.678 INFO  Load/download plugins (done) | time=0ms
+11:29:59.709 INFO  Load project repositories
+11:29:59.713 INFO  Load project repositories (done) | time=8ms
+11:29:59.744 INFO  Indexing files...
+11:29:59.745 INFO  Project configuration:
+11:29:59.751 INFO  1 file indexed
+11:29:59.751 INFO  Quality profile for py: Sonar way
+11:29:59.752 INFO  ------------- Run sensors on module SQE Stock QA
+11:29:59.791 INFO  Load metrics repository
+11:29:59.850 INFO  Load metrics repository (done) | time=56ms
+11:30:00.225 INFO  Sensor JaCoCo XML Report Importer [jacoco]
+11:30:00.228 INFO  'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+11:30:00.228 INFO  No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+11:30:00.229 INFO  Sensor JaCoCo XML Report Importer [jacoco] (done) | time=2ms
+11:30:00.229 INFO  Sensor Python Sensor [python]
+11:30:00.387 INFO  Starting global symbols computation
+11:30:00.394 INFO  1 source file to be analyzed
+11:30:01.184 INFO  1/1 source file has been analyzed
+11:30:01.214 INFO  Starting rules execution
+11:30:01.214 INFO  1 source file to be analyzed
+11:30:03.349 INFO  1/1 source file has been analyzed
+11:30:03.354 INFO  The Python analyzer was able to leverage cached data from previous analyses for 0 out of 1 files. These files were not parsed.
+11:30:03.354 INFO  Sensor Python Sensor [python] (done) | time=3123ms
+11:30:03.354 INFO  Sensor Cobertura Sensor for Python coverage [python]
+11:30:04.617 INFO  Python test coverage
+11:30:04.621 INFO  Parsing report '/workspace/work/sonar/coverage.xml'
+11:30:04.669 INFO  Sensor Cobertura Sensor for Python coverage [python] (done) | time=1319ms
+11:30:04.669 INFO  Sensor PythonXUnitSensor [python]
+11:30:05.072 INFO  Sensor PythonXUnitSensor [python] (done) | time=403ms
+11:30:05.073 INFO  Sensor Java Config Sensor [iac]
+11:30:05.085 INFO  0 source files to be analyzed
+11:30:05.089 INFO  0/0 source files have been analyzed
+11:30:05.090 INFO  Sensor Java Config Sensor [iac] (done) | time=18ms
+11:30:05.090 INFO  Sensor IaC Docker Sensor [iac]
+11:30:05.094 INFO  0 source files to be analyzed
+11:30:05.137 INFO  0/0 source files have been analyzed
+11:30:05.138 INFO  Sensor IaC Docker Sensor [iac] (done) | time=44ms
+11:30:05.138 INFO  Sensor TextAndSecretsSensor [text]
+11:30:05.138 INFO  Available processors: 2
+11:30:05.138 INFO  Using 2 threads for analysis.
+11:30:05.476 INFO  The property "sonar.tests" is not set. To improve the analysis accuracy, we categorize a file as a test file if any of the following is true:
+  * The filename starts with "test"
+  * The filename contains "test." or "tests."
+  * Any directory in the file path is named: "doc", "docs", "test" or "tests"
+  * Any directory in the file path has a name ending in "test" or "tests"
+
+11:30:05.492 INFO  Using git CLI to retrieve untracked files
+11:30:05.506 INFO  Analyzing language associated files and files included via "sonar.text.inclusions" that are tracked by git
+11:30:05.515 INFO  1 source file to be analyzed
+11:30:05.640 INFO  1/1 source file has been analyzed
+11:30:05.642 INFO  Sensor TextAndSecretsSensor [text] (done) | time=507ms
+11:30:05.646 INFO  ------------- Run sensors on project
+11:30:05.669 INFO  Sensor Zero Coverage Sensor
+11:30:05.670 INFO  Sensor Zero Coverage Sensor (done) | time=0ms
+11:30:05.671 INFO  SCM Publisher SCM provider for this project is: git
+11:30:05.672 INFO  SCM Publisher 1 source file to be analyzed
+11:30:05.914 INFO  SCM Publisher 1/1 source file have been analyzed (done) | time=239ms
+11:30:05.946 INFO  CPD Executor Calculating CPD for 1 file
+11:30:05.965 INFO  CPD Executor CPD calculation finished (done) | time=16ms
+11:30:05.967 INFO  SCM revision ID '4e7274524d382f7a296e251fbc0031848b905de4'
+11:30:06.054 INFO  Analysis report generated in 84ms, dir size=550.0 kB
+11:30:06.080 INFO  Analysis report compressed in 26ms, zip size=193.3 kB
+11:30:06.602 INFO  Analysis report uploaded in 520ms
+11:30:06.603 INFO  ANALYSIS SUCCESSFUL, you can find the results at: http://127.0.0.1:19000/dashboard?id=sqe-stock-qa
+11:30:06.604 INFO  Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+11:30:06.604 INFO  More about the report processing at http://127.0.0.1:19000/api/ce/task?id=4b9c2032-6ecf-41ad-ab20-b405ffc16916
+11:30:06.612 INFO  Analysis total time: 12.920 s
+11:30:06.612 INFO  SonarScanner Engine completed successfully
+11:30:06.644 INFO  EXECUTION SUCCESS
+11:30:06.645 INFO  Total time: 17.200s

@@ -14,3 +14,11 @@ before submission** — this record discloses use, it does not substitute for th
 
 *(Continue adding a row for every further AI-assisted artifact — test code, CI config, report
 sections, etc. Keep prompts used, per the assignment's requirement to "keep your prompts.")*
+
+## Continuation — Eman Hassan
+
+| Date | Tool | Purpose | Output produced | Verification |
+|---|---|---|---|---|
+| 2026-11-25 | OpenAI Codex | Continue the SQE project in QA-only scope and retain evidence | Test plan, traceability and handoff updates, MC/DC witness test, browser and k6 scripts, issue drafts, weekly update and PDF | Cross-checked existing GitHub metadata and test names, ran tools on the disposable baseline, saved tool outputs and recorded blockers |
+
+The continuation prompt requested repository and CI inspection, traceability, planning, SonarQube and MC/DC, browser and accessibility tests, passive ZAP, k6, defect and Pareto analysis, weekly notes, disclosure and a final report. It required QA-only changes and authentic evidence. The original prompt is retained in the conversation. Student review and viva preparation remain with Eman Hassan.

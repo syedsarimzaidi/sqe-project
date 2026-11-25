@@ -10,6 +10,8 @@ needed, so work can continue (e.g. in another tool) without re-deriving context.
 
 ---
 
+The sections below preserve the original handoff. See the continuation log at the end for subsequent verification and current blockers.
+
 ## ✅ DONE — verified, committed, and pushed to `main`
 
 ### Section 1 — Scope & registration (`docs/01_scope.md`)
@@ -161,3 +163,25 @@ Hand these off as-is; nothing below has been attempted beyond the scaffolding no
   section for the exact env vars and commands used throughout this project.
 - `tests/team/unit` and `tests/team/api` run via plain `pytest` (see `pytest.ini`,
   `conftest.py` at repo root) — both suites are green as of this handoff.
+
+## Continuation log — Eman Hassan
+
+| Phase | Outcome | Evidence |
+|---|---|---|
+| Baseline audit | Inspected the handoff, scope, requirements, existing tests, workflow, Git history and GitHub records at `4e72745`. Test and mutation jobs succeeded and SonarCloud was skipped. The coverage gate reads the XML but contains no coverage assertion. | [History](evidence/2026-11-25/history.txt), [CI jobs](evidence/2026-11-25/ci-jobs.json), [Issues](evidence/2026-11-25/issues.json) |
+| Planning | Preserved the existing RTM and risk register. Added execution scope, priorities and exit criteria. | [Traceability](06_traceability_matrix.md), [Risks](07_risk_register.md), [Test plan](08_test_plan.md) |
+| Unit and decision verification | 26 unit tests passed. Selected method statements and branches reached 100% in a fresh measurement. Radon confirmed 5/7 complexity. Reviewed single-condition witnesses and verified all three downstream BR-3 conditions using four additional passing cases. | [Decision coverage](09_decision_coverage.md) |
+| Browser and accessibility baseline | Login keyboard check reached both credential fields and submit. Lighthouse accessibility scored 85/100. Axe reported six rule violations. | [Lighthouse](evidence/2026-11-25/lighthouse-login.json), [axe](evidence/2026-11-25/axe-login.json), [keyboard](evidence/2026-11-25/keyboard-login.json) |
+| k6 latency baseline | 40 successful requests at one VU. Receive p95 68.48 ms and dispatch p95 103.94 ms. Stock balance stayed at 10 after 20 adjustment pairs. | [k6](evidence/2026-11-25/k6.log), [before](evidence/2026-11-25/k6-before.json), [after](evidence/2026-11-25/k6-after.json) |
+| ZAP passive review | Three nominated local responses processed and queue drained. The report contains alerts scoped to the development topology. | [Requests](evidence/2026-11-25/zap-requests.txt), [ZAP HTML](evidence/2026-11-25/zap-report.html), [ZAP JSON](evidence/2026-11-25/zap-alerts.json) |
+| Defect analysis | Validated the login contrast and hidden TOTP focus issues using axe and keyboard evidence and identified the non-enforcing CI coverage step by source inspection. Filed accessibility issues #5 and #7 and CI issue #6 in the project repository. | [Root cause and Pareto](10_defect_analysis.md) |
+| Authenticated UI | Receive changed 10 to 15 and dispatch changed 10 to 7. Both balances persisted after reload. A separate view-only session reached Stock Details without enabled adjustment actions. Axe recorded seven rule violations on Stock Details. | [Playwright](evidence/2026-11-25/playwright-stock.log), [receive](evidence/2026-11-25/add-stock.png), [dispatch](evidence/2026-11-25/remove-stock.png), [stock axe](evidence/2026-11-25/axe-stock.json) |
+| Restart recovery | Stopped the disposable server between requests. Observed an outage, restarted, confirmed balance 10, then executed a successful receive/dispatch pair and confirmed balance 10 again. | [Recovery](evidence/2026-11-25/recovery.log) |
+| Backend dependency audit | pip-audit reported 165 packages and zero known vulnerabilities at run time. | [Audit JSON](evidence/2026-11-25/pip-audit.json) |
+| SonarQube attempt | Local image extraction failed with ENOSPC on two attempts. Standalone distribution requests returned HTTP 403. The extracted official server application reached Elasticsearch startup, which exited because the runtime does not expose `/proc/self/coredump_filter`. CI SonarCloud remained skipped. | [Docker retry](evidence/2026-11-25/sonarqube-retry.log), [distribution requests](evidence/2026-11-25/sonarqube-portable.log), [CI](evidence/2026-11-25/ci-jobs.json) |
+| Reporting and risk | Updated the risk register with observed outcomes. Recorded the evidenced project week, GQM metrics and AI use. | [Risk register](07_risk_register.md), [Weekly progress](11_weekly_progress.md), [AI disclosure](ai_use_record.md) |
+| Mutation rerun | Detached baseline worktree reproduced 13/15 killed (86.7%). M02 and M13 still survived. | [Mutation output](evidence/2026-11-25/mutation.log) |
+| Frontend dependency check | npm advisory endpoint returned 5 direct advisories for the installed tree. Input and output are retained. | [Dependency assessment](05_security_assessment.md) |
+| SonarQube completed | Compatible 10.6 Community Build processed the file-level scan. Reported coverage 31.4%, 12 code smells and zero reported bugs, vulnerabilities or hotspots. First-analysis quality gate OK with zero returned conditions. | [Static analysis](03_static_analysis.md), [Scanner](evidence/2026-11-25/sonarqube-scanner.log) |
+| Historical defect recheck | A rollback-only model probe reproduced issue #3 in receive and dispatch, and reproduced issue #4's successful model write followed by a SQLite readback exception. | [Probe output](evidence/2026-11-25/stock-boundary-recheck.log) |
+| Final report | Compiled the verified evidence and scope limits into the PDF and retained its editable source. Frontend TypeScript check, Vite production build and Django system check passed. | [PDF](13_final_report.pdf), [Report source](13_final_report.md), [Vite build](evidence/2026-11-25/frontend-build.log), [TypeScript check](evidence/2026-11-25/frontend-typecheck.log), [Django check](evidence/2026-11-25/django-check.log) |

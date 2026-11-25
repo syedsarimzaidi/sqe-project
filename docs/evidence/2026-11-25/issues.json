@@ -1,0 +1,14 @@
+[
+  {
+    "number": 4,
+    "title": "BUG: large quantity (schema-valid, 10 digits) + existing balance overflows DB field, corrupts row",
+    "state": "open",
+    "html_url": "https://github.com/syedsarimzaidi/sqe-project/issues/4"
+  },
+  {
+    "number": 3,
+    "title": "BUG: add_stock()/take_stock() crash with unhandled decimal.InvalidOperation on NaN input",
+    "state": "open",
+    "html_url": "https://github.com/syedsarimzaidi/sqe-project/issues/3"
+  }
+]

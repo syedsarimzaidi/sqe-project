@@ -1,0 +1,27 @@
+[
+  {
+    "tag": "INPUT",
+    "name": "login-username",
+    "visibleFocus": true
+  },
+  {
+    "tag": "INPUT",
+    "name": "login-password",
+    "visibleFocus": true
+  },
+  {
+    "tag": "INPUT",
+    "name": "",
+    "visibleFocus": true
+  },
+  {
+    "tag": "BUTTON",
+    "name": "Send me an email",
+    "visibleFocus": true
+  },
+  {
+    "tag": "BUTTON",
+    "name": "Log In",
+    "visibleFocus": true
+  }
+]

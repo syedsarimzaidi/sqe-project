@@ -1,0 +1,6 @@
+Before stop: {"pk":3,"quantity":10.0}
+Service unreachable during deliberate restart.
+After restart: {"pk":3,"quantity":10.0}
+Post-restart add status: 201
+Post-restart remove status: 201
+After successful write pair: {"pk":3,"quantity":10.0}

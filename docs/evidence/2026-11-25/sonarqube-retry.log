@@ -1,0 +1,32 @@
+community: Pulling from library/sonarqube
+8e8df94085bf: Pulling fs layer
+dc7d15801c3b: Pulling fs layer
+0efc318c609d: Pulling fs layer
+4f4fb700ef54: Pulling fs layer
+885025ea8eb3: Pulling fs layer
+dd997aadd0c0: Pulling fs layer
+d4fb953c26d2: Pulling fs layer
+4f4fb700ef54: Waiting
+885025ea8eb3: Waiting
+dd997aadd0c0: Waiting
+d4fb953c26d2: Waiting
+8e8df94085bf: Verifying Checksum
+8e8df94085bf: Download complete
+4f4fb700ef54: Verifying Checksum
+4f4fb700ef54: Download complete
+885025ea8eb3: Verifying Checksum
+885025ea8eb3: Download complete
+dc7d15801c3b: Verifying Checksum
+dc7d15801c3b: Download complete
+d4fb953c26d2: Verifying Checksum
+d4fb953c26d2: Download complete
+8e8df94085bf: Pull complete
+0efc318c609d: Verifying Checksum
+0efc318c609d: Download complete
+dc7d15801c3b: Pull complete
+0efc318c609d: Pull complete
+4f4fb700ef54: Pull complete
+885025ea8eb3: Pull complete
+dd997aadd0c0: Verifying Checksum
+dd997aadd0c0: Download complete
+failed to register layer: mkdirat opt/sonarqube/elasticsearch/lib/java-version-checker: no space left on device

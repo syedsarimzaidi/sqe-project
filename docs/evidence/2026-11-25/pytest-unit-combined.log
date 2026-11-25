@@ -1,0 +1,10 @@
+..............................                                           [100%]
+=============================== warnings summary ===============================
+../sqe-env/lib/python3.12/site-packages/stdimage/models.py:22
+  /workspace/work/sqe-env/lib/python3.12/site-packages/stdimage/models.py:22: DeprecationWarning: The django-stdimage is deprecated in favor of django-pictures.
+  Migration instructions are available in the README:
+  https://github.com/codingjoe/django-stdimage#migration-instructions
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+30 passed, 1 warning in 8.04s

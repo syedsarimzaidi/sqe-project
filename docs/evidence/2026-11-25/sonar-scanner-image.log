@@ -1,0 +1,26 @@
+latest: Pulling from sonarsource/sonar-scanner-cli
+48c7a3aa33f8: Pulling fs layer
+9e3b37b567ba: Pulling fs layer
+4d70bf08597b: Pulling fs layer
+a90054572227: Pulling fs layer
+289e4f4e5f22: Pulling fs layer
+71cb89d1756d: Pulling fs layer
+4f4fb700ef54: Pulling fs layer
+a90054572227: Waiting
+289e4f4e5f22: Waiting
+71cb89d1756d: Waiting
+4f4fb700ef54: Waiting
+4d70bf08597b: Verifying Checksum
+4d70bf08597b: Download complete
+a90054572227: Verifying Checksum
+a90054572227: Download complete
+48c7a3aa33f8: Download complete
+71cb89d1756d: Verifying Checksum
+71cb89d1756d: Download complete
+4f4fb700ef54: Verifying Checksum
+4f4fb700ef54: Download complete
+289e4f4e5f22: Verifying Checksum
+289e4f4e5f22: Download complete
+9e3b37b567ba: Verifying Checksum
+9e3b37b567ba: Download complete
+failed to register layer: mkdirat usr/lib/.build-id/9e: no space left on device

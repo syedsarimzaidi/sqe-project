@@ -1,0 +1,8 @@
+Official SonarQube 10.6 community image: sha256:f289dacdf7b33a88468a93c11d125c6a102b29a394c0aaf445406ea4b5ce1fbe, application layer sha256:7b87d6fa783da9310eb18656cf208ff4706651c152ef5fde77728571e5976dd0
+total 114832
+dr-x------ 2 agent agent      4096 Jun 21  2024 extensions
+dr-x------ 5 agent agent      4096 Jun 21  2024 jdbc
+dr-x------ 2 agent agent      4096 Jun 21  2024 scanner
+-r-x------ 1 agent agent 117566332 Jun 21  2024 sonar-application-10.6.0.92116.jar
+-r-x------ 1 agent agent      3577 Jun 21  2024 sonar-shutdowner-10.6.0.92116.jar
+lrwxrwxrwx 1 agent agent        53 Sep 17  2024 sonarqube.jar -> /opt/sonarqube/lib/sonar-application-10.6.0.92116.jar

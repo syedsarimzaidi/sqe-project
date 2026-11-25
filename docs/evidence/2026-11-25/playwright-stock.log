@@ -1,0 +1,12 @@
+Add Stock passed. 10 → 15 after reload.
+Remove Stock passed. 10 → 7 after reload.
+Stock detail axe violations: [
+  'aria-required-children',
+  'button-name',
+  'color-contrast',
+  'image-alt',
+  'landmark-one-main',
+  'page-has-heading-one',
+  'region'
+]
+View-only account could view the item and had no enabled stock adjustments.

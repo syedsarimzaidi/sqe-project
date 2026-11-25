@@ -115,3 +115,9 @@ npm audit
 | OWASP ZAP passive scan | ❌ Blocked — ZAP needs Docker/binary download, unavailable in this sandbox |
 | Dependency audit — backend (`pip-audit`) | ✅ Done — 165 packages, 0 vulnerabilities |
 | Dependency audit — frontend (`npm audit`) | ✅ Done — 12 found (3 high / 9 moderate), triaged above; 1 production-relevant (react-router) |
+
+## Continuation verification — Eman Hassan
+
+Playwright confirmed the view-only user can inspect Stock Details and has no enabled adjustment controls. The portable ZAP daemon processed three nominated unauthenticated local responses. The reported framing and CSP alerts arose on the Vite development page. The run also reported content-type/header information findings. The scope covers development responses only. See [execution evidence](12_execution_evidence.md).
+
+The backend rerun audited 165 packages and returned zero known vulnerabilities. For the frontend, a frozen Yarn install provided the observed versions. The npm registry Bulk Advisory endpoint returned five direct records across four packages: `glob`, `minimatch`, `react-router` and `zod`. Four advisories were moderate and one high. The snapshot included 638 unique package names. npm's tree listing flagged existing resolution mismatches, so the input and raw response are retained for interpretation. Direct advisory counts differ from npm audit's dependency-chain aggregation. These results do not establish reachability. See [versions](evidence/2026-11-25/npm-bulk-input.json) and [response](evidence/2026-11-25/npm-bulk-output.json).

@@ -59,3 +59,18 @@ full kill/survive detail per mutant).
 These three gaps are reasonable candidates for the "what would you add with more time" section
 of the final report / viva, since they are identified and explained here rather than silently
 missing.
+
+## Eman Hassan continuation verification
+
+The baseline unit suite was rerun with statement and branch measurements. The original BR-3 row is scoped to deletable fixtures. In production code, depletion also requires `can_delete()` to return true. The selected method arcs and MC/DC witnesses are documented in [decision coverage](09_decision_coverage.md).
+
+| Requirement | Additional verified evidence | Boundary of evidence |
+|---|---|---|
+| FR-1 | Playwright receive, 10 to 15 after reload | One authorized fixture |
+| FR-4 | Playwright dispatch, 10 to 7 after reload | One authorized fixture |
+| FR-1 and FR-4 roles | Playwright view-only user could inspect stock and had no enabled adjust controls | Existing CI API tests provide backend permission evidence |
+| FR-8 | k6 receive/dispatch pairs returned the third fixture to 10, and a post-restart pair returned it to 10 again | One VU and one local SQLite row |
+| BR-2 | Named serialized and quantity guard witnesses and method branch arcs | Separate single-condition guards |
+| BR-3 | Four independent depletion decision cases | `can_delete()` result controlled to isolate the decision |
+
+See [raw browser and k6 evidence](12_execution_evidence.md) and [decision coverage](09_decision_coverage.md).

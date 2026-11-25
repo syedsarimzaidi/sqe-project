@@ -1,0 +1,25 @@
+INVE-W3: Could not detect git information.
+[2m2026-11-25T06:19:49.289050Z[0m [[33m[1mwarning  [0m] [1misGeneratingSchema called outside of expected contexts - this may be a sign of a problem with the ready() function[0m [[0m[1m[34minventree[0m][0m
+[2m2026-11-25T06:19:49.289260Z[0m [[33m[1mwarning  [0m] [1msys.argv: ['tests/team/mutation/run_mutation.py'][0m [[0m[1m[34minventree[0m][0m
+Baseline check: running tests against the UNMODIFIED code first...
+Baseline OK (all tests pass on unmodified code).
+
+M01   [ROR                                ] add_stock    -> KILLED
+M02   [ROR                                ] take_stock   -> SURVIVED
+M03   [ROR                                ] take_stock   -> KILLED
+M04   [NR                                 ] add_stock    -> KILLED
+M05   [NR                                 ] take_stock   -> KILLED
+M06   [CR                                 ] add_stock    -> KILLED
+M07   [CR                                 ] take_stock   -> KILLED
+M08   [AOR                                ] add_stock    -> KILLED
+M09   [AOR                                ] take_stock   -> KILLED
+M10   [ClampInversion (custom, BR-1)      ] take_stock   -> KILLED
+M11   [SerializedGuardRemoval (custom, BR-2b)] add_stock    -> KILLED
+M12   [SerializedGuardRemoval (custom, BR-2b)] take_stock   -> KILLED
+M13   [Boundary                           ] take_stock   -> SURVIVED
+M14   [StatementDeletion                  ] add_stock    -> KILLED
+M15   [StatementDeletion                  ] take_stock   -> KILLED
+
+Mutation score: 13/15 killed = 86.7%
+
+Wrote docs/mutation_report.md

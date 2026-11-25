@@ -1,0 +1,4 @@
+http://127.0.0.1:5173/web/login 200
+http://127.0.0.1:18763/api/ 200
+http://127.0.0.1:18763/api/stock/ 401
+Pending passive records: 0

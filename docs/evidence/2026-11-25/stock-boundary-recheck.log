@@ -1,0 +1,8 @@
+INVE-W3: Could not detect git information.
+116 objects imported automatically (use -v 2 for details).
+
+add_stock, issue #3: InvalidOperation raised
+take_stock, issue #3: InvalidOperation raised
+issue #4 model boundary: add returned True
+issue #4 model boundary: SQLite readback raised InvalidOperation
+Disposable probe transaction rolled back.
