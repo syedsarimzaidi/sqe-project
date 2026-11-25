@@ -193,3 +193,5 @@ The assignment PDF was subsequently reviewed and revealed additional mandatory w
 Four sustained 60-second k6 runs completed. Both 1-VU runs passed. Both 5-VU runs failed the zero-error threshold, with 59.57% and 57.06% failed requests. See [load verification](15_load_verification.md). Release is held pending investigation and clean-state repetition. Submission metadata placeholders are present in the editable report.
 
 Team correction from requester: Eman Hassan (24i-3082) and Adnan Ali (24i-3129). Earlier solo assumptions are superseded. Section and actual area ownership remain unconfirmed.
+
+Detailed report compiled from Git checkpoint abccfaf with both confirmed members, environment, commands, test outcomes, representative raw outputs, screenshots, pinned evidence links and current gaps. See docs/17_detailed_test_report.pdf and its Markdown source. Section and actual student ownership remain pending. This compilation did not rerun every test.
