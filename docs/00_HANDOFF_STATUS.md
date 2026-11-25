@@ -67,6 +67,20 @@ needed, so work can continue (e.g. in another tool) without re-deriving context.
     stock, can overflow the DB field's `max_digits=15` limit and **corrupt the row**
     (crashes on next read) — a real gap between serializer-level and DB-level validation
 
+### Security assessment (dependency audit half)
+- `docs/05_security_assessment.md`
+  - **Backend**: `pip-audit` on `mis/src/backend/requirements.txt` — 165 packages scanned,
+    **0 known vulnerabilities**.
+  - **Frontend**: `npm audit` on `mis/src/frontend/package.json` — 12 found (3 high, 9
+    moderate), triaged one by one: all but `react-router`/`react-router-dom` are
+    build/dev-tooling only (not shipped to users); `react-router` (moderate, open redirect)
+    is the one production-relevant finding, with the fix direction noted (not applied —
+    QA-only scope).
+  - Role-based access control: already evidenced at the **API level** (see Exploratory QA
+    pass above, Probe #8, and the committed API test suite) — re-stated/cross-referenced in
+    this doc. UI-level Playwright role checks and the OWASP ZAP scan are **not done** — see
+    "Still needed" #3/#4 below for why.
+
 ---
 
 ## ❌ STILL NEEDED — not started / not usable yet
@@ -96,12 +110,16 @@ Hand these off as-is; nothing below has been attempted beyond the scaffolding no
    - Assignment also wants one screen's before/after fix comparison — pick something
      concrete on the stock-item detail page.
 
-4. **Security assessment**
-   - Not started. Needed: OWASP ZAP passive scan against the running app, a dependency
-     audit (`pip-audit` on `src/backend/requirements.txt`, `npm audit` on
-     `src/frontend/package.json`), and role-based access-control Playwright tests
-     (partially evidenced already at the API level — Probe #8 above — but the assignment
-     wants this as proper Playwright UI tests too).
+4. **Security assessment — remaining half**
+   - Dependency audit (both backend and frontend) is **done** — see
+     `docs/05_security_assessment.md`. What's left:
+     - **OWASP ZAP passive scan** — not run. ZAP needs Docker (or a binary download), both
+       blocked in this sandbox the same way Docker/Playwright already are elsewhere in this
+       file. Run `docker run -t ghcr.io/zaproxy/zaproxy zap-baseline.py -t <dev-server-url>
+       -r zap_report.html` against the running dev server once Docker is available.
+     - **Role-based access-control as Playwright UI tests** — API-level is already evidenced
+       (Probe #8, committed API suite); the assignment also wants this walked through the
+       real React UI, which needs the Playwright browser binary (see item 2 below).
 
 5. **Performance & recovery (k6)**
    - Not started. Needs a k6 script hitting `/api/stock/add/` and `/api/stock/remove/`
