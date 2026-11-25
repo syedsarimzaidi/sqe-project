@@ -185,3 +185,9 @@ Hand these off as-is; nothing below has been attempted beyond the scaffolding no
 | SonarQube completed | Compatible 10.6 Community Build processed the file-level scan. Reported coverage 31.4%, 12 code smells and zero reported bugs, vulnerabilities or hotspots. First-analysis quality gate OK with zero returned conditions. | [Static analysis](03_static_analysis.md), [Scanner](evidence/2026-11-25/sonarqube-scanner.log) |
 | Historical defect recheck | A rollback-only model probe reproduced issue #3 in receive and dispatch, and reproduced issue #4's successful model write followed by a SQLite readback exception. | [Probe output](evidence/2026-11-25/stock-boundary-recheck.log) |
 | Final report | Compiled the verified evidence and scope limits into the PDF and retained its editable source. Frontend TypeScript check, Vite production build and Django system check passed. | [PDF](13_final_report.pdf), [Report source](13_final_report.md), [Vite build](evidence/2026-11-25/frontend-build.log), [TypeScript check](evidence/2026-11-25/frontend-typecheck.log), [Django check](evidence/2026-11-25/django-check.log) |
+
+## Rubric completion follow-up
+
+The assignment PDF was subsequently reviewed and revealed additional mandatory work. The previous PDF is a verified checkpoint and does not close all assignment requirements. Submission metadata and filename instructions are in [the submission checklist](14_submission_checklist.md). The requester specified a solo submission for Eman Hassan with a 17:00 PKT deadline on 25 November 2026. Load reruns are in progress and will be reported from their actual outputs.
+
+Four sustained 60-second k6 runs completed. Both 1-VU runs passed. Both 5-VU runs failed the zero-error threshold, with 59.57% and 57.06% failed requests. See [load verification](15_load_verification.md). Release is held pending investigation and clean-state repetition. Submission metadata placeholders are present in the editable report.

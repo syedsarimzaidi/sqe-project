@@ -1,0 +1,1 @@
+time="2026-11-25T07:05:10Z" level=error msg="Error: Use a disposable loopback instance, stock fixture ID and fixture API token.\n\tat file:///-:9:9(64)\n" hint="script exception" source=stacktrace

@@ -1,0 +1,4 @@
+users=1 repeat=1 exit=0
+users=1 repeat=2 exit=0
+users=5 repeat=1 exit=99
+users=5 repeat=2 exit=99

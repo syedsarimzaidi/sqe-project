@@ -1,0 +1,49 @@
+
+
+  █ THRESHOLDS 
+
+    checks
+    ✗ 'rate==1' rate=42.93%
+
+    http_req_duration{operation:dispatch}
+    ✓ 'p(95)<500' p(95)=142.01ms
+
+    http_req_duration{operation:receive}
+    ✓ 'p(95)<500' p(95)=136.36ms
+
+    http_req_failed
+    ✗ 'rate==0' rate=57.06%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 1621   26.94246/s
+    checks_succeeded...: 42.93% 696 out of 1621
+    checks_failed......: 57.06% 925 out of 1621
+
+    ✗ receive returns 201
+      ↳  39% — ✓ 455 / ✗ 711
+    ✗ dispatch returns 201
+      ↳  52% — ✓ 241 / ✗ 214
+
+    HTTP
+    http_req_duration..............: avg=76.77ms  min=21.32ms  med=69.46ms  max=495.31ms p(90)=114.65ms p(95)=138.78ms
+      { expected_response:true }...: avg=57.97ms  min=21.32ms  med=56.74ms  max=455.65ms p(90)=89.32ms  p(95)=100.08ms
+      { operation:dispatch }.......: avg=91.58ms  min=62.44ms  med=82.25ms  max=478.49ms p(90)=117.39ms p(95)=142.01ms
+      { operation:receive }........: avg=70.99ms  min=21.32ms  med=57.32ms  max=495.31ms p(90)=113.36ms p(95)=136.36ms
+    http_req_failed................: 57.06% 925 out of 1621
+    http_reqs......................: 1621   26.94246/s
+
+    EXECUTION
+    iteration_duration.............: avg=257.71ms min=173.72ms med=245.24ms max=701.22ms p(90)=320.06ms p(95)=348.32ms
+    iterations.....................: 1166   19.379956/s
+    vus............................: 5      min=5           max=5
+    vus_max........................: 5      min=5           max=5
+
+    NETWORK
+    data_received..................: 1.1 MB 18 kB/s
+    data_sent......................: 442 kB 7.4 kB/s
+
+
+
+time="2026-11-25T07:09:47Z" level=error msg="thresholds on metrics 'checks, http_req_failed' have been crossed"

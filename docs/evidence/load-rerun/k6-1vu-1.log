@@ -1,0 +1,46 @@
+
+
+  █ THRESHOLDS 
+
+    checks
+    ✓ 'rate==1' rate=100.00%
+
+    http_req_duration{operation:dispatch}
+    ✓ 'p(95)<500' p(95)=72.51ms
+
+    http_req_duration{operation:receive}
+    ✓ 'p(95)<500' p(95)=33.38ms
+
+    http_req_failed
+    ✓ 'rate==0' rate=0.00%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 488     8.117982/s
+    checks_succeeded...: 100.00% 488 out of 488
+    checks_failed......: 0.00%   0 out of 488
+
+    ✓ receive returns 201
+    ✓ dispatch returns 201
+
+    HTTP
+    http_req_duration..............: avg=47.5ms   min=23.08ms  med=61.03ms  max=285.08ms p(90)=68.8ms   p(95)=70.54ms 
+      { expected_response:true }...: avg=47.5ms   min=23.08ms  med=61.03ms  max=285.08ms p(90)=68.8ms   p(95)=70.54ms 
+      { operation:dispatch }.......: avg=67.59ms  min=60.6ms   med=66.06ms  max=285.08ms p(90)=70.27ms  p(95)=72.51ms 
+      { operation:receive }........: avg=27.41ms  min=23.08ms  med=25.82ms  max=97.12ms  p(90)=30.79ms  p(95)=33.38ms 
+    http_req_failed................: 0.00%  0 out of 488
+    http_reqs......................: 488    8.117982/s
+
+    EXECUTION
+    iteration_duration.............: avg=246.28ms min=235.71ms med=243.91ms max=463.83ms p(90)=251.83ms p(95)=259.61ms
+    iterations.....................: 244    4.058991/s
+    vus............................: 1      min=1        max=1
+    vus_max........................: 1      min=1        max=1
+
+    NETWORK
+    data_received..................: 297 kB 4.9 kB/s
+    data_sent......................: 134 kB 2.2 kB/s
+
+
+
