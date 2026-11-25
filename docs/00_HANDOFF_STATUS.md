@@ -88,6 +88,13 @@ needed, so work can continue (e.g. in another tool) without re-deriving context.
   BR-3 (delete-on-deplete) has no API/mutation coverage, BR-4 (locking) has no concurrency
   test, FR-3/FR-7 tracking-history isn't independently re-asserted at the API layer.
 
+### Risk register
+- `docs/07_risk_register.md` — 10 risks (R1–R10) across delivery, test-coverage, application,
+  security, and environment categories, each rated Likelihood/Impact/Severity with an honest
+  mitigation/status line. Covers the solo-submission risk, the BR-3/BR-4 coverage gaps, the
+  2 unfixed bugs, the react-router CVEs, the sandbox tooling blockers (ZAP/Playwright/k6/
+  SonarQube), the custom-mutation-harness methodology risk, and the viva-defense risk.
+
 ---
 
 ## ❌ STILL NEEDED — not started / not usable yet
@@ -134,16 +141,12 @@ Hand these off as-is; nothing below has been attempted beyond the scaffolding no
      the server mid-request, confirm no partial/corrupt state — note Issue #4 above is
      relevant prior art for what "corrupt state" looks like in this app).
 
-6. **Risk register** — not created. The traceability matrix (below) is done; a risk register
-   (likelihood/impact per gap, e.g. "no concurrency test for BR-4", "solo-submission timeline
-   risk") is a separate, smaller remaining document.
+6. **Weekly progress reports / GQM metrics** — not created.
 
-7. **Weekly progress reports / GQM metrics** — not created.
-
-8. **Final PDF report compiling everything above** — not created. All the raw material
+7. **Final PDF report compiling everything above** — not created. All the raw material
    (this handoff file plus every `docs/*.md` file) should be the primary input.
 
-9. **Viva prep** — not started (can't be automated; the student needs to actually
+8. **Viva prep** — not started (can't be automated; the student needs to actually
    understand what's in `docs/` well enough to explain and defend it live, especially
    given the solo-submission risk already discussed with the student).
 
