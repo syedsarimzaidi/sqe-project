@@ -1,16 +1,15 @@
 ---
 title: Software Quality Engineering
 subtitle: InvenTree stock receive and dispatch
-author: Eman Hassan
-roll_number: TO_BE_FILLED
+author: Eman Hassan (24i-3082) and Adnan Ali (24i-3129)
+roll_number: 24i-3082, 24i-3129
 section: TO_BE_FILLED
 date: 25 November 2026
 ---
 
 # Submission details
 
-Student — Eman Hassan  
-Roll number — **TO_BE_FILLED**  
+Students — **Eman Hassan (24i-3082)** and **Adnan Ali (24i-3129)**
 Section — **TO_BE_FILLED**
 
 # Executive summary

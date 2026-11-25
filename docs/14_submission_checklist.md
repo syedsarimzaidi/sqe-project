@@ -13,3 +13,9 @@ Deadline supplied by the requester is 25 November 2026 at 17:00 Pakistan time.
 The existing report is a checkpoint. Outstanding rubric requirements are tracked in the conversation audit and must be individually verified before being marked complete. Workload reruns use the same build and fixture rows, one and five virtual users, two repetitions each, with a 60-second constant workload.
 
 Actual time spent in the earlier sessions was not tracked. Retrospective estimates must be identified explicitly and cannot serve as measured actual effort.
+
+## Confirmed team details
+
+The requester confirmed two members: Eman Hassan (24i-3082) and Adnan Ali (24i-3129). Section remains unconfirmed. Use Project_24i-3082_24i-3129_<Section>.pdf and the corresponding ZIP. Earlier solo assumptions are superseded. Area ownership and individual contributions must be confirmed and recorded accurately.
+
+The final PDF should contain result tables, representative evidence and links to the complete raw outputs. Include the full raw JSON, logs, screenshots and reports in the repository ZIP alongside .git.

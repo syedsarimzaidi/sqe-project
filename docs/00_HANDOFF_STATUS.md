@@ -191,3 +191,5 @@ Hand these off as-is; nothing below has been attempted beyond the scaffolding no
 The assignment PDF was subsequently reviewed and revealed additional mandatory work. The previous PDF is a verified checkpoint and does not close all assignment requirements. Submission metadata and filename instructions are in [the submission checklist](14_submission_checklist.md). The requester specified a solo submission for Eman Hassan with a 17:00 PKT deadline on 25 November 2026. Load reruns are in progress and will be reported from their actual outputs.
 
 Four sustained 60-second k6 runs completed. Both 1-VU runs passed. Both 5-VU runs failed the zero-error threshold, with 59.57% and 57.06% failed requests. See [load verification](15_load_verification.md). Release is held pending investigation and clean-state repetition. Submission metadata placeholders are present in the editable report.
+
+Team correction from requester: Eman Hassan (24i-3082) and Adnan Ali (24i-3129). Earlier solo assumptions are superseded. Section and actual area ownership remain unconfirmed.
