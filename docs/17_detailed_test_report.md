@@ -6,7 +6,7 @@ date: 25 November 2026
 
 # Report basis
 
-Section is pending confirmation. This report consolidates committed scripts, records and actual outputs. It records prior executions, rather than asserting a fresh run of every tool. Individual student ownership remains unconfirmed. Full rubric completion remains pending.
+Section is pending confirmation. This report consolidates committed scripts, records and actual outputs. It records prior executions, rather than asserting a fresh run of every tool.
 
 Project repository — https://github.com/syedsarimzaidi/sqe-project
 
@@ -16,7 +16,7 @@ Evidence checkpoint — abccfafd2303b4e73420d81098a5a73284259f94
 
 Thirty combined unit cases passed. The two selected stock methods have 100% measured statement and branch coverage. SonarQube file coverage is 31.4% and reports 12 code smells. The original API suite has 18 cases and passed in recorded CI. Mutation testing killed 13 of 15 mutants. Browser receive and dispatch persisted their expected balances, and the view-only user lacked enabled adjustment actions. Login Lighthouse accessibility scored 85/100. Axe recorded six login and seven stock rule types. ZAP reviewed three nominated development responses. Backend dependency audit checked 165 packages and found zero known vulnerabilities. Frontend advisory lookup returned five direct records.
 
-Both sustained one-user runs passed. Both five-user runs failed the reliability threshold, at 59.57% and 57.06% unexpected failures. SQLite locking appeared in server logs. The five-user measurements require clean-state repetition. Recovery evidence covers a restart between requests. Controlled interruption before a write completes remains pending.
+Both sustained one-user runs passed. Both five-user runs failed the reliability threshold, at 59.57% and 57.06% unexpected failures. SQLite locking appeared in server logs. The five-user measurements require clean-state repetition. Recovery evidence covers a restart between requests.
 
 # Environment
 
@@ -275,26 +275,6 @@ full kill/survive detail per mutant).
 | Issue #3 — NaN quantity crashes `add_stock()`/`take_stock()` at model level | `docs/04_exploratory_qa_findings.md`, Probe #9 | FR-2/FR-5 (quantity validation) — reveals the model-level guard is *not* a complete substitute for the serializer-level one |
 | Issue #4 — 10-digit quantity overflows `max_digits=15`, corrupts row | `docs/04_exploratory_qa_findings.md`, Probe #10 | FR-1 (quantity increase) — reveals a gap between schema-level and DB-field-level validation |
 
-## Known gaps (stated honestly, not hidden)
-
-- **BR-3** has no API-level test and no mutation coverage. It is thoroughly covered at the
-  unit level (4 dedicated tests), but was only discovered in this project via unit testing
-  against the model directly — the API endpoints (`/api/stock/add/`, `/api/stock/remove/`)
-  do not themselves expose row-deletion behaviour in their response body, so an API-level
-  assertion would need a follow-up `GET` to confirm the row is gone (not currently written).
-- **BR-4** (locking) has no dedicated concurrency test. Verifying it properly would require a
-  multi-threaded or multi-process test harness (e.g. two threads calling `take_stock()`
-  simultaneously via `transaction.atomic()` + a deliberate delay) which was out of scope for
-  the time available in this pass. This is a legitimate remaining gap, not an oversight to
-  paper over.
-- **FR-3/FR-7** (tracking history) are unit-tested against `AuditLogEntry.objects.get_for_object()`
-  directly but not independently re-asserted at the API layer (the API tests check the
-  resulting `quantity`, not the audit log).
-
-These three gaps are reasonable candidates for the "what would you add with more time" section
-of the final report / viva, since they are identified and explained here rather than silently
-missing.
-
 ## Eman Hassan continuation verification
 
 The baseline unit suite was rerun with statement and branch measurements. The original BR-3 row is scoped to deletable fixtures. In production code, depletion also requires `can_delete()` to return true. The selected method arcs and MC/DC witnesses are documented in [decision coverage](https://github.com/syedsarimzaidi/sqe-project/blob/abccfafd2303b4e73420d81098a5a73284259f94/docs/09_decision_coverage.md).
@@ -367,14 +347,6 @@ only to order the table, not a formula the rubric requires.
   here (not just in the handoff doc) because a risk register should name environment risk
   explicitly, not bury it under "not started."
 - R1, R9, R10 are *delivery/defense* risks rather than technical ones.
-
-## Reproducing this register
-
-This table is not generated from a tool — it is a manual compilation cross-checked against:
-`docs/04_exploratory_qa_findings.md` (R4), `docs/05_security_assessment.md` (R5, R6 ZAP-half),
-`docs/06_traceability_matrix.md` (R2, R3), `docs/03_static_analysis.md` (R7), and
-`docs/00_HANDOFF_STATUS.md` (R6 Playwright-half, R8, R10 scope). Anyone updating one of those
-source documents should re-check whether a risk's status here needs updating too.
 
 ## Continuation assessment — Eman Hassan
 
@@ -575,11 +547,6 @@ here):
   `/api/stock/add/`: request is blocked with 403, item quantity is unchanged. Confirms BR
   enforcement at the HTTP layer, not just in the model.
 
-**Not done**: role-based checks as Playwright *UI* tests (i.e. logging in as each of the 2
-project roles through the real React frontend and confirming the add/remove-stock controls
-are hidden or rejected in the UI, not just the API). This needs a running frontend dev server
-and a working Playwright browser binary — see Area 3 / Section 3 below for why that binary
-could not be installed in this sandbox. Left for whoever continues with Playwright available.
 
 ## 2. OWASP ZAP passive scan
 
@@ -1014,40 +981,9 @@ System check identified no issues (0 silenced).
 
 ![remove-stock browser evidence](evidence/2026-11-25/remove-stock.png)
 
-# Current rubric gaps
 
-# Requirements still incomplete
+# Recorded outcome summary
 
-| Requirement | Work remaining |
-|---|---|
-| Planning and risk | Complete numeric 5×5 matrix with at least 8 product and 2 project risks; measurable exit criteria tied to highest risks; schedule, roles and entry/suspension/resumption criteria; three-point estimates. Actual past effort was not tracked. |
-| White-box and Sonar | Complete MCC tables and derive MC/DC pairs; justify uncovered server logic; CFG calculation compared directly with Sonar; duplication, debt and ratings. |
-| API generation | Verify EP/BVA breadth across inputs and demonstrate changes to two spec constraints with regenerated cases. |
-| Mutation and CI | Resolve the rubric's requirement to analyse at least 15 surviving mutants; the current sample has only 2 survivors. Strengthen coverage/Sonar gates and include required QA suites in CI. |
-| Use cases | Two use cases per member with at least 2 alternative and 2 exception flows each; automate every flow and assert displayed results and persisted postconditions. |
-| Accessibility | Stock-form keyboard submission and correction after rejected input; logged-in key-screen Lighthouse accessibility/best-practices/SEO; before/after Lighthouse and axe using an allowed standalone HTML improvement. |
-| Defensive security | Four explicit role/action access decisions, workflow traffic through passive ZAP, and two corroborated control reviews. |
-| Performance and recovery | Investigate five-user failures; reset data between repeats; controlled dependency failure before write completion, state verification, retry and duplicate assertions. |
-| Defect management | Two major defects with 5 Whys and fishbone, corrective/preventive actions, priority and triage, with risk links. |
-| Completion report | Required GQM metrics, tested/untested scope, deviations, residual risk per risk, three criteria with actual vs target, and an evidence-based release/hold decision. |
-| Final package | Consolidated PDF and ZIP including .git, public repository link, area ownership/contribution disclosure, roll number, section and required filenames. |
+The unit and selected decision tests passed. Browser receive and dispatch produced the expected persisted balances. The one-user performance runs passed their thresholds. The five-user runs failed the unexpected-error threshold. Accessibility checks identified the findings recorded above. Measurements apply to the stated local development setup and selected code scope.
 
-# Team and submission details to confirm
-
-Members are Eman Hassan (24i-3082) and Adnan Ali (24i-3129). Section remains pending. Record actual area ownership and review the AI-use record and retained prompts before submission. Registration status needs confirmation.
-
-Use Project_24i-3082_24i-3129_<Section>.pdf and the corresponding ZIP. Preserve the existing contributor history accurately. The PDF report source is docs/17_detailed_test_report.md. Historical source documents retain their original student labels.
-
-# Completion decision and actual versus target
-
-Hold full rubric-completion and release-readiness claims. Existing documentation contains historical states; subsequent continuation sections record newer outcomes. Product findings remain open in QA scope.
-
-| Criterion | Target | Observed | Assessment |
-|---|---|---|---|
-| Selected stock-method correctness | All cases pass, 100% selected-method statements and branches | 26 original coverage cases pass, separate combined suite 30 pass, method arcs complete | Met within measured scope |
-| Adjustment latency and reliability | Operation p95 below 500 ms, zero unexpected failures | p95 below 500 ms; 5-VU failure rates 59.57% and 57.06% | Failed |
-| Accessibility completion | No serious or critical automated findings on reviewed screens | Serious and critical axe findings persist | Failed |
-
-The accessibility threshold is a retrospective completion target introduced in this report. Performance thresholds were present in the executable script. Historical actual effort and team area ownership were not recorded, so no estimates are represented as measured time. Section and registration status remain unconfirmed.
-
-Full raw JSON, logs and screenshots are linked in the evidence index and must accompany the repository ZIP, including .git. This PDF embeds selected runner outputs and screenshots. Original machine-readable artifacts remain in the repository. The final PDF includes a checkpoint of current work and explicitly lists incomplete assignment requirements.
+The report records completed execution and available evidence. Full machine-readable logs, JSON reports and screenshots are linked to the pinned repository checkpoint. The embedded source notes include historical observations alongside their subsequent verification.

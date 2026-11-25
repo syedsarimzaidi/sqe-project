@@ -195,3 +195,4 @@ Four sustained 60-second k6 runs completed. Both 1-VU runs passed. Both 5-VU run
 Team correction from requester: Eman Hassan (24i-3082) and Adnan Ali (24i-3129). Earlier solo assumptions are superseded. Section and actual area ownership remain unconfirmed.
 
 Detailed report compiled from Git checkpoint abccfaf with both confirmed members, environment, commands, test outcomes, representative raw outputs, screenshots, pinned evidence links and current gaps. See docs/17_detailed_test_report.pdf and its Markdown source. Section and actual student ownership remain pending. This compilation did not rerun every test.
+Requester asked that the detailed report cover completed work only. Removed its remaining-rubric checklist and retained actual failures and measurement scope. Repository handoff continues to track outstanding work independently.
