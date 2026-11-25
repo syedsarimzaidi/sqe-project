@@ -81,6 +81,13 @@ needed, so work can continue (e.g. in another tool) without re-deriving context.
     this doc. UI-level Playwright role checks and the OWASP ZAP scan are **not done** — see
     "Still needed" #3/#4 below for why.
 
+### Traceability matrix
+- `docs/06_traceability_matrix.md` — every FR-1..FR-8 and BR-1..BR-4 mapped to its actual
+  covering unit test(s), API test(s), and mutant(s) (compiled directly from the test file
+  source, not re-typed from memory). Honestly documents 3 known gaps rather than hiding them:
+  BR-3 (delete-on-deplete) has no API/mutation coverage, BR-4 (locking) has no concurrency
+  test, FR-3/FR-7 tracking-history isn't independently re-asserted at the API layer.
+
 ---
 
 ## ❌ STILL NEEDED — not started / not usable yet
@@ -127,10 +134,9 @@ Hand these off as-is; nothing below has been attempted beyond the scaffolding no
      the server mid-request, confirm no partial/corrupt state — note Issue #4 above is
      relevant prior art for what "corrupt state" looks like in this app).
 
-6. **Risk register, traceability matrix** — not created. Should map each FR/BR to its
-   covering test(s) — most of the raw material already exists in the tables inside
-   `docs/01_scope.md`, `docs/02_coverage_note.md`, and `docs/mutation_report.md`; this is
-   mostly a matter of compiling them into the formal matrix format the rubric wants.
+6. **Risk register** — not created. The traceability matrix (below) is done; a risk register
+   (likelihood/impact per gap, e.g. "no concurrency test for BR-4", "solo-submission timeline
+   risk") is a separate, smaller remaining document.
 
 7. **Weekly progress reports / GQM metrics** — not created.
 
